@@ -1,0 +1,208 @@
+﻿<UserControl x:Class="AdmAssist.Views.Pages.ScanningPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:converters="clr-namespace:AdmAssist.Views.Converters"
+      xmlns:controls1="clr-namespace:AdmAssist.Views.Controls"
+      xmlns:viewModels="clr-namespace:AdmAssist.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="1000"
+             DataContextChanged="ScanningPage_OnDataContextChanged">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Templates/IpRangeDataTemplate.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <ContextMenu x:Key="RowMenu" x:Shared="False" DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                         ItemsSource="{Binding HostOperationsMenuTree}">
+
+                <ContextMenu.ItemContainerStyle>
+
+                    <Style TargetType="MenuItem">
+                        <Setter Property="ItemsSource" Value="{Binding Children}"></Setter>
+                        <Setter Property="OverridesDefaultStyle" Value="False"></Setter>
+                        <Setter Property="Padding" Value="0,5,0,5"></Setter>
+                        <Setter Property="Header" Value="{Binding Name}"></Setter>
+                        <Setter Property="Command" Value="{Binding HostCommand}"/>
+                        <Setter Property="CommandParameter" Value="{Binding SelectedItems, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                        <Setter Property="InputGestureText" Value="{Binding Shortcut, StringFormat='    {0}'}"></Setter>
+                    </Style>
+                </ContextMenu.ItemContainerStyle>
+                
+            </ContextMenu>
+
+            <converters:AppStateNotScanningToTrueConverter x:Key="AppStateNotScanningToTrueConverter"/>
+            <converters:AppStateScanningToTrueConverter x:Key="AppStateScanningToTrueConverter"/>
+            <converters:FilterColumnsToHighlightConverter x:Key="FilterColumnsToHighlightConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="0" MaxHeight="300" Padding="0,0,3,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <ItemsControl ItemsSource="{Binding IpRanges}"
+                          ItemTemplate="{StaticResource IpRangeDataTemplate}"/>
+        </ScrollViewer>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Height="26" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="2">
+
+            <ComboBox Name="ColumnChoser"
+                      Width="150"
+                      ItemsSource="{Binding FilterColumns}"
+                      SelectedIndex="0"
+                      SelectionChanged="OnCbObjectsSelectionChanged">
+
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding ObjectData}" VerticalAlignment="Center" Checked="OnCbObjectCheckBoxChecked" Unchecked="OnCbObjectCheckBoxChecked" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <TextBlock IsHitTestVisible="False" Name="TbColumns" Text="Chose columns..." TextAlignment="Left" Padding="0"
+                       Margin="-160,3,0,0"
+                       Width="120"
+                       Height="20" />
+
+            <controls1:DelayTextBox Width="100"
+                     Margin="5,0,0,0"
+                     x:Name="SearchBox"
+                     controls:TextBoxHelper.Watermark="search filter"
+                     controls:TextBoxHelper.SelectAllOnFocus="True"
+                     controls:TextBoxHelper.ClearTextButton="True"
+                     TextChanged="TextBoxBase_OnTextChanged">
+                <controls1:DelayTextBox.Style>
+                    <Style TargetType="controls1:DelayTextBox" BasedOn="{StaticResource {x:Type TextBox}}"/>
+                </controls1:DelayTextBox.Style>
+            </controls1:DelayTextBox>
+
+            <Button Width="100" Margin="5,0,0,0"
+                    Command="{Binding ScanCommand}"
+                    IsEnabled="{Binding Mode=OneWay, Path=AppStats.ApplicationState, Converter={StaticResource AppStateNotScanningToTrueConverter}}"
+                    Click="ScanClick">
+                Scan
+            </Button>
+            <Button Width="100" Margin="5,0,0,0"
+                    Command="{Binding StopScanningCommand}"
+                    IsEnabled="{Binding Mode=OneWay, Path=AppStats.ApplicationState, Converter={StaticResource AppStateScanningToTrueConverter}}">
+                Stop
+            </Button>
+        </StackPanel >
+
+        <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                  ItemsSource="{Binding GridSource}"
+                  IsReadOnly="True"
+                  EnableColumnVirtualization="True"
+                  EnableRowVirtualization="True"
+                  Name="DataGrid"
+                  Sorting="DataGrid_OnSorting"
+                  FrozenColumnCount="2"
+                  AutoGenerateColumns="False">
+
+            <DataGrid.Style>
+                <Style BasedOn="{StaticResource MetroDataGrid}" TargetType="{x:Type DataGrid}">
+                    <Setter Property="AlternatingRowBackground" Value="{DynamicResource GrayBrush10}" />
+                </Style>
+            </DataGrid.Style>
+
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                    <!--<ContentPresenter Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content}" Margin="3,3,0,0"/>-->
+                                    <controls1:HighlightingTextBlock
+                                        Margin="3,2,3,0"
+                                        OriginalText="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content.Text}">
+
+                                        <controls1:HighlightingTextBlock.HighlightedText>
+                                            <MultiBinding Converter="{StaticResource FilterColumnsToHighlightConverter}" Mode="OneWay" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding RelativeSource="{ RelativeSource Mode=FindAncestor, AncestorType=controls:MetroWindow }" Path="DataContext.(viewModels:MainViewModel.AcknowledgedFilterString)"/>
+                                                <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Column.Header" />
+                                            </MultiBinding>
+                                        </controls1:HighlightingTextBlock.HighlightedText>
+
+                                    </controls1:HighlightingTextBlock>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=Status}" Value="False">
+                            <Setter Property="Foreground" Value="Gray"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Column.Header, Mode=OneWay}" Value="Status">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                            <Image Name="Image" Stretch="None" Source="/Resources/Images/Question.png"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Status}" Value="False">
+                                                <Setter TargetName="Image" Property="Source" Value="/Resources/Images/Stop.png"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=Status}" Value="True">
+                                                <Setter TargetName="Image" Property="Source" Value="/Resources/Images/Ok.png"/>
+                                            </DataTrigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+            
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow" BasedOn="{StaticResource MetroDataGridRow}">
+                    <Setter Property="OverridesDefaultStyle" Value="False"/>
+                    <Setter Property="ContextMenu" Value="{StaticResource RowMenu}"/>
+                    <EventSetter Event="Loaded" Handler="Row_Loaded"/>
+                </Style>
+            </DataGrid.RowStyle>
+
+        </DataGrid>
+        <DockPanel Grid.Row="2" Grid.ColumnSpan="2" Height="20" Margin="0,3,0,0">
+            <TextBlock Text="Scanning threads count: " Margin="10,0,0,0"/>
+            <TextBlock Text="{Binding AppStats.CurrentlyRunningThreadsCount}"/>
+            <!--<Label Content="{Binding AppStats.CurrentScanningProgress}" ContentStringFormat="Scanning progress: {}{0}%" Width="50"/>-->
+            <TextBlock Text="Scanning progress: " Margin="10,0,0,0"/>
+            <TextBlock Text="{Binding AppStats.CurrentScanningProgress, StringFormat={}{0}%}"/>
+            <TextBlock Text="App state: " Margin="10,0,0,0"/>
+            <TextBlock Text="{Binding AppStats.ApplicationState}"/>
+            <TextBlock Text="Selected count: " Margin="10,0,0,0"/>
+            <TextBlock Text="{Binding ElementName=DataGrid, Path=SelectedItems.Count}"/>
+            <Label HorizontalContentAlignment="Right" DockPanel.Dock="Right" Padding="5,0,0,0" Content="© Taras Dymkar Epicentr K 2017 sarat@if.epicentrk.com " Foreground="{DynamicResource GrayNormalBrush}"/>
+        </DockPanel>
+    </Grid>
+</UserControl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

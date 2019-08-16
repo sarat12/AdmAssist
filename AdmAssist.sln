@@ -1,0 +1,99 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteQueries", "RemoteQueries\RemoteQueries.csproj", "{911F85BB-A12C-4CD6-A5EF-7CDE2124CB28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdmAssist", "AdmAssist\AdmAssist.csproj", "{DF7618CC-5189-4615-8916-6AE9AE13FF27}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{0958304F-3AAA-42D0-B1D2-F3CAF8462479}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TightVncViewerLauncher", "Plugins\TightVncViewerLauncher\TightVncViewerLauncher.csproj", "{81149921-8D2E-4DF1-9170-EEAF5CF2527A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteWmiProcessManager", "Plugins\RemoteWmiProcessManager\RemoteWmiProcessManager.csproj", "{F6D1469F-3824-4A15-877F-2DAB4C322B67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteInstalledSoftwareViewer", "Plugins\RemoteInstalledSoftwareViewer\RemoteInstalledSoftwareViewer.csproj", "{83F5A9C5-56D1-4541-BADC-8980568163F4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{911F85BB-A12C-4CD6-A5EF-7CDE2124CB28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{911F85BB-A12C-4CD6-A5EF-7CDE2124CB28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{911F85BB-A12C-4CD6-A5EF-7CDE2124CB28}.Debug|x86.ActiveCfg = Debug|x86
+		{911F85BB-A12C-4CD6-A5EF-7CDE2124CB28}.Debug|x86.Build.0 = Debug|x86
+		{911F85BB-A12C-4CD6-A5EF-7CDE2124CB28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{911F85BB-A12C-4CD6-A5EF-7CDE2124CB28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{911F85BB-A12C-4CD6-A5EF-7CDE2124CB28}.Release|x86.ActiveCfg = Release|x86
+		{911F85BB-A12C-4CD6-A5EF-7CDE2124CB28}.Release|x86.Build.0 = Release|x86
+		{DF7618CC-5189-4615-8916-6AE9AE13FF27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF7618CC-5189-4615-8916-6AE9AE13FF27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF7618CC-5189-4615-8916-6AE9AE13FF27}.Debug|x86.ActiveCfg = Debug|x86
+		{DF7618CC-5189-4615-8916-6AE9AE13FF27}.Debug|x86.Build.0 = Debug|x86
+		{DF7618CC-5189-4615-8916-6AE9AE13FF27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF7618CC-5189-4615-8916-6AE9AE13FF27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF7618CC-5189-4615-8916-6AE9AE13FF27}.Release|x86.ActiveCfg = Release|x86
+		{DF7618CC-5189-4615-8916-6AE9AE13FF27}.Release|x86.Build.0 = Release|x86
+		{81149921-8D2E-4DF1-9170-EEAF5CF2527A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81149921-8D2E-4DF1-9170-EEAF5CF2527A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81149921-8D2E-4DF1-9170-EEAF5CF2527A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{81149921-8D2E-4DF1-9170-EEAF5CF2527A}.Debug|x86.Build.0 = Debug|Any CPU
+		{81149921-8D2E-4DF1-9170-EEAF5CF2527A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81149921-8D2E-4DF1-9170-EEAF5CF2527A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81149921-8D2E-4DF1-9170-EEAF5CF2527A}.Release|x86.ActiveCfg = Release|Any CPU
+		{81149921-8D2E-4DF1-9170-EEAF5CF2527A}.Release|x86.Build.0 = Release|Any CPU
+		{F6D1469F-3824-4A15-877F-2DAB4C322B67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6D1469F-3824-4A15-877F-2DAB4C322B67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6D1469F-3824-4A15-877F-2DAB4C322B67}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F6D1469F-3824-4A15-877F-2DAB4C322B67}.Debug|x86.Build.0 = Debug|Any CPU
+		{F6D1469F-3824-4A15-877F-2DAB4C322B67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6D1469F-3824-4A15-877F-2DAB4C322B67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6D1469F-3824-4A15-877F-2DAB4C322B67}.Release|x86.ActiveCfg = Release|Any CPU
+		{F6D1469F-3824-4A15-877F-2DAB4C322B67}.Release|x86.Build.0 = Release|Any CPU
+		{83F5A9C5-56D1-4541-BADC-8980568163F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83F5A9C5-56D1-4541-BADC-8980568163F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83F5A9C5-56D1-4541-BADC-8980568163F4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{83F5A9C5-56D1-4541-BADC-8980568163F4}.Debug|x86.Build.0 = Debug|Any CPU
+		{83F5A9C5-56D1-4541-BADC-8980568163F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83F5A9C5-56D1-4541-BADC-8980568163F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83F5A9C5-56D1-4541-BADC-8980568163F4}.Release|x86.ActiveCfg = Release|Any CPU
+		{83F5A9C5-56D1-4541-BADC-8980568163F4}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{81149921-8D2E-4DF1-9170-EEAF5CF2527A} = {0958304F-3AAA-42D0-B1D2-F3CAF8462479}
+		{F6D1469F-3824-4A15-877F-2DAB4C322B67} = {0958304F-3AAA-42D0-B1D2-F3CAF8462479}
+		{83F5A9C5-56D1-4541-BADC-8980568163F4} = {0958304F-3AAA-42D0-B1D2-F3CAF8462479}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://sarat43894.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = AdmAssist\\AdmAssist.csproj
+		SccProjectName1 = AdmAssist
+		SccLocalPath1 = AdmAssist
+		SccProjectUniqueName2 = RemoteQueries\\RemoteQueries.csproj
+		SccProjectName2 = RemoteQueries
+		SccLocalPath2 = RemoteQueries
+		SccProjectUniqueName3 = Plugins\\TightVncViewerLauncher\\TightVncViewerLauncher.csproj
+		SccProjectTopLevelParentUniqueName3 = AdmAssist.sln
+		SccProjectName3 = Plugins/TightVncViewerLauncher
+		SccLocalPath3 = Plugins\\TightVncViewerLauncher
+		SccProjectUniqueName4 = Plugins\\RemoteWmiProcessManager\\RemoteWmiProcessManager.csproj
+		SccProjectTopLevelParentUniqueName4 = AdmAssist.sln
+		SccProjectName4 = Plugins/RemoteWmiProcessManager
+		SccLocalPath4 = Plugins\\RemoteWmiProcessManager
+		SccProjectUniqueName5 = Plugins\\RemoteInstalledSoftwareViewer\\RemoteInstalledSoftwareViewer.csproj
+		SccProjectTopLevelParentUniqueName5 = AdmAssist.sln
+		SccProjectName5 = Plugins/RemoteInstalledSoftwareViewer
+		SccLocalPath5 = Plugins\\RemoteInstalledSoftwareViewer
+	EndGlobalSection
+EndGlobal

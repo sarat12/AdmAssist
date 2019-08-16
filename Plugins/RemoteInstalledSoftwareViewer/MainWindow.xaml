@@ -1,0 +1,59 @@
+﻿<controls:MetroWindow x:Class="RemoteInstalledSoftwareViewer.MainWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      mc:Ignorable="d"
+                      Height="600" Width="1000"
+                      GlowBrush="DodgerBlue"
+                      NonActiveGlowBrush="OrangeRed">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <DataGrid Name="DataGrid" ItemsSource="{Binding Programs}" IsReadOnly="True" AutoGenerateColumns="False" SelectionMode="Extended"  SelectionUnit="Cell"  AlternationCount="2">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                            <Setter Property="Background" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                            <Setter Property="Background" Value="#F5F5F5"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FFA5D2FF"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#FF40A1FF"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Vendor" Binding="{Binding Vendor}"/>
+                <DataGridTextColumn Header="Installed" Binding="{Binding InstallationDate, StringFormat={}{0:dd.MM.yyyy}}"/>
+                <DataGridTextColumn Header="Version" Binding="{Binding Version}"/>
+                <DataGridTextColumn Header="Location" Binding="{Binding IstallLocation}"/>
+                <DataGridTextColumn Header="Uninstall string" Binding="{Binding UninstallString}"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+        <Grid Grid.Row="1">
+            <Button Width="150" Margin="2" Command="{Binding GetInstalledSoftwareListCommand}">Refresh</Button>
+        </Grid>
+    </Grid>
+</controls:MetroWindow>

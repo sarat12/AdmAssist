@@ -1,0 +1,6 @@
+﻿[connection]
+host=%ip
+port=5900
+password=68224acea63ae8b6
+[options]
+fitwindow=1
